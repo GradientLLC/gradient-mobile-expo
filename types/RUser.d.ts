@@ -1,0 +1,1 @@
+export type RRelationshipOptions = 'single' | 'in relationship' | 'its complicated' | 'not interested'; 
