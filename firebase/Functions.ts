@@ -494,6 +494,42 @@ const useFunctions = () => {
         }
     }, [fcm]);
 
+
+    const handleMockFunction = async () => {
+
+        const newUser = new User({
+            Created: new Date(),
+            userInfo: {
+                userId: '',
+                userName: `@`,
+                name: '',
+                email: '',
+                emailVerified: true,
+                phoneNumber: '',
+                profilePhoto: '',
+                coverPhoto: '',
+                about: '',
+                fcm: fcm,
+                isAccountDel: false,
+                reportedBy: [],
+                isReported: 0,
+                followers: [],
+                following: [],
+                gyms: [],
+                blockedBy: [],
+                blockedTo: [],
+                isPrivate: false,
+                relationStatus: 'single',
+                seenStories: [],
+                isGymOwner: false,
+                tokens: 3
+            }
+        });
+
+        const testString = '';
+        await setDoc(doc(db, `${DB_Mode}_TestFunction`, testString), newUser);
+    }
+
     return {
         handleSignUp,
         handleGymOwnerSignup,
@@ -504,7 +540,8 @@ const useFunctions = () => {
         handleGetUserContent,
         handleLogout,
         handleUpdateUserWorkoutStats,
-        handleGoogleSignIn
+        handleGoogleSignIn,
+        handleMockFunction
     };
 };
 
