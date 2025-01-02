@@ -18,7 +18,6 @@ const Fonts = {
     GrotesqueSemiBold: 'DarkerGrotesque-SemiBold',
     GrotesqueBold: 'DarkerGrotesque-Bold',
     GrotesqueExtraBold: 'DarkerGrotesque-ExtraBold',
-
 }
 
 const FontSize = {

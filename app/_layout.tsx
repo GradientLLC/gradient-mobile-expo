@@ -7,6 +7,7 @@ import { GradientBackground } from '../assets/icons/Index';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../redux/Store';
+import Splash from './index';
 
 // Initialize push notifications
 const initPushNotifications = async () => {
@@ -16,7 +17,6 @@ const initPushNotifications = async () => {
 export default function RootLayout() {
   const router = useRouter();
   const segments = useSegments();
-  const { loggedInUserDetails } = useSelector(({ auth }) => auth);
 
   useEffect(() => {
     initPushNotifications();

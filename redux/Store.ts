@@ -11,12 +11,19 @@ const transformCircular = createTransform(
   (outboundState, key) => JSOG.decode(outboundState),
 );
 
+const authTransform = createTransform(
+  (state) => ({ ...state, loggedInUserDetails: JSOG.encode(state.loggedInUserDetails) }),
+  (state) => ({ ...state, loggedInUserDetails: JSOG.decode(state.loggedInUserDetails) }),
+  { whitelist: ['auth'] }
+);
+
+
 // Redux Persist configuration
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   blacklist: ['loadingReducer'],
-  transforms: [transformCircular],
+  transforms: [transformCircular, authTransform],
 };
 
 // Create persisted reducer

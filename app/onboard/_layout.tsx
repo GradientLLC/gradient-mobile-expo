@@ -3,13 +3,13 @@ import { Text, View, Image, TouchableOpacity, Platform } from 'react-native'
 import React from 'react'
 import { SvgXml } from "react-native-svg";
 import { useRouter } from 'expo-router'; // Changed from useNavigation
-import useStyles from '../hooks/useStyles';
-import { LoginLogo, OnBoardBackground} from '../assets/icons/Index';
-import { windowWidth } from '../Helpers/Constants';
-import useColors from '../hooks/useColors';
-import useFonts from '../hooks/useFonts';
-import ActionButton from '../components/ActionButton';
-import ActionButtonGradient from '../components/ActionButtonGradient';
+import useStyles from '../../hooks/useStyles';
+import { LoginLogo, OnBoardBackground} from '../../assets/icons/Index';
+import { windowWidth } from '../../helpers/Constants';
+import useColors from '../../hooks/useColors';
+import useFonts from '../../hooks/useFonts';
+import ActionButton from '../../components/ActionButton';
+import ActionButtonGradient from '../../components/ActionButtonGradient';
 
 const OnBoard = React.memo(() => {
     const router = useRouter(); // Changed from useNavigation
