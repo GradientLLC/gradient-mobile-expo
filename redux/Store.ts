@@ -1,49 +1,42 @@
-import { applyMiddleware, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, createTransform } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import JSOG from 'jsog';
 
-import rootReducer from './RootReducer'
+import rootReducer from './RootReducer';
 
-
-const preloadedState = {};
-
+// Transform for handling circular references
 const transformCircular = createTransform(
- (inboundState, key) => JSOG.encode(inboundState),
- (outboundState, key) => JSOG.decode(outboundState),
+  (inboundState, key) => JSOG.encode(inboundState),
+  (outboundState, key) => JSOG.decode(outboundState),
 );
 
+// Redux Persist configuration
 const persistConfig = {
- key: 'root',
- storage: AsyncStorage,
- blacklist: ['loadingReducer'],
- transforms: [transformCircular],
+  key: 'root',
+  storage: AsyncStorage,
+  blacklist: ['loadingReducer'],
+  transforms: [transformCircular],
 };
 
+// Create persisted reducer
 const persistedReducers = persistReducer(persistConfig, rootReducer);
 
-const middleware = [];
-
-const customLogger = store => next => action => {
-  if (__DEV__) {
-    const startTime = performance.now();
-    console.group(action.type);
-    console.log('Payload:', action.payload);
-    
-    const result = next(action);
-    
-    console.log('New State:', store.getState());
-    console.log(`Time: ${performance.now() - startTime}ms`);
-    console.groupEnd();
-    return result;
-  }
-  return next(action);
-};
-
-export const store = createStore(
- persistedReducers,
- preloadedState,
- //applyMiddleware(customLogger)
-);
+// Create store using Redux Toolkit's configureStore
+export const store = configureStore({
+  reducer: persistedReducers,
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware({
+      // Add middleware configuration to handle serialization issues with persistedReducers
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },
+   }),
+  preloadedState: {},
+});
 
 export const persistor = persistStore(store);
+
+// Export types for TypeScript support
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
