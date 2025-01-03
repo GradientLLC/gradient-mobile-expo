@@ -10,12 +10,20 @@ import useColors from '../../hooks/useColors';
 import useFonts from '../../hooks/useFonts';
 import ActionButton from '../../components/ActionButton';
 import ActionButtonGradient from '../../components/ActionButtonGradient';
+import useFunctions from '@/firebase/Functions';
 
 const OnBoard = React.memo(() => {
     const router = useRouter(); // Changed from useNavigation
     const { styles, insets } = useStyles();
     const { colors } = useColors();
     const { Fonts, FontSize } = useFonts();
+
+    const { handleMockFunction } = useFunctions();
+
+    const handleFirebase = () => {
+
+    }
+    
     
     return (
         <View style={styles.Splash}>
@@ -44,10 +52,11 @@ const OnBoard = React.memo(() => {
 
                     <ActionButton
                         title={'GET STARTED'}
-                        onPress={() => router.push({
-                            pathname: '/register',
-                            params: { isGymOwner: false }
-                        })}
+                        // onPress={() => router.push({
+                        //     pathname: '/register',
+                        //     params: { isGymOwner: false }
+                        // })}
+                        onPress={handleMockFunction}
                         titleStyle={{
                             color: colors.Black, 
                         }}

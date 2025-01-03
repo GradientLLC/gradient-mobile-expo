@@ -1,5 +1,5 @@
+import { db, auth } from '../firebaseConfig';
 import { 
-    getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     sendPasswordResetEmail,
@@ -7,10 +7,11 @@ import {
     GoogleAuthProvider,
     signInWithCredential
 } from 'firebase/auth';
-import { 
-    getFirestore, 
+import {
     doc,
     setDoc,
+    addDoc,
+    collection,
     getDoc,
     updateDoc,
     increment,
@@ -33,9 +34,6 @@ const useFunctions = () => {
     const { fcm } = useSelector(({ platform }: RState) => platform);
     const { handleGymChatRoom } = useGyms();
     const dispatch = useDispatch();
-    
-    const auth = getAuth();
-    const db = getFirestore();
 
     const [request, response, promptAsync] = Google.useAuthRequest({
         clientId: 'YOUR_CLIENT_ID',
@@ -496,7 +494,7 @@ const useFunctions = () => {
 
 
     const handleMockFunction = async () => {
-
+        console.log("Hello1");
         const newUser = new User({
             Created: new Date(),
             userInfo: {
@@ -525,9 +523,14 @@ const useFunctions = () => {
                 tokens: 3
             }
         });
+        console.log("logREACH");
 
-        const testString = '';
-        await setDoc(doc(db, `${DB_Mode}_TestFunction`, testString), newUser);
+        const testString = 'abc123';
+        await setDoc(doc(db(), `${DB_Mode}_TestFunction`, testString), newUser)
+        .then(result => {console.log("hi")})
+        .catch(error => { console.log('Error Message:', error) } );
+        // addDoc(collection(db(), "test_function"), newUser);
+        console.log("Added new user");
     }
 
     return {
