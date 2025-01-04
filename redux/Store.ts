@@ -6,16 +6,16 @@ import JSOG from 'jsog';
 import rootReducer from './RootReducer';
 
 // Transform for handling circular references
-const transformCircular = createTransform(
-  (inboundState, key) => JSOG.encode(inboundState),
-  (outboundState, key) => JSOG.decode(outboundState),
-);
+// const transformCircular = createTransform(
+//   (inboundState, key) => JSOG.encode(inboundState),
+//   (outboundState, key) => JSOG.decode(outboundState),
+// );
 
-const authTransform = createTransform(
-  (state) => ({ ...state, loggedInUserDetails: JSOG.encode(state.loggedInUserDetails) }),
-  (state) => ({ ...state, loggedInUserDetails: JSOG.decode(state.loggedInUserDetails) }),
-  { whitelist: ['auth'] }
-);
+// const authTransform = createTransform(
+//   (state) => ({ ...state, loggedInUserDetails: JSOG.encode(state.loggedInUserDetails) }),
+//   (state) => ({ ...state, loggedInUserDetails: JSOG.decode(state.loggedInUserDetails) }),
+//   { whitelist: ['auth'] }
+// );
 
 
 // Redux Persist configuration
@@ -23,7 +23,7 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   blacklist: ['loadingReducer'],
-  transforms: [transformCircular, authTransform],
+  // transforms: [transformCircular, authTransform],
 };
 
 // Create persisted reducer

@@ -27,7 +27,19 @@ export default function Splash() {
         // Get FCM token (if needed)
         // const token = await Notifications.getExpoPushTokenAsync();
 
-        if (loggedInUserDetails) {
+        //TODO: Implement Sign In
+        // if (loggedInUserDetails) {
+        //   // await handleGetMyProfile();
+        //   setTimeout(() => {
+        //     router.replace('/(tabs)');
+        //   }, 1500);
+        // } else {
+        //   setTimeout(() => {
+        //     router.replace('/onboard');
+        //   }, 1500);
+        // }
+
+        if (true) {
           // await handleGetMyProfile();
           setTimeout(() => {
             router.replace('/(tabs)');

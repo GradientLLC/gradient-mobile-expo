@@ -7,6 +7,8 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { SvgXml } from "react-native-svg";
+import { Home,Workout,Chat, Profile,Add,ActiveHome,ActiveWorkout,ActiveChat,ActiveProfile} from "../../assets/icons/Index";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -28,36 +30,36 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="compass.fill" color={color} />,
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused, color }) => <SvgXml xml={focused ? ActiveHome : Home} height={28} />,
         }}
       />
       <Tabs.Screen
         name="workouts"
         options={{
-          title: 'Workouts',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="figure.run" color={color} />,
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused, color }) => <SvgXml xml={focused ? ActiveWorkout : Workout} height={28} />,
+        }}
+      />
+      <Tabs.Screen
+        name="explore"
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({color }) => <SvgXml xml={Add} height={28} />,
         }}
       />
       <Tabs.Screen
         name="chats"
         options={{
-          title: 'Chats',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="message.fill" color={color} />,
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused, color }) => <SvgXml xml={focused ? ActiveChat : Chat} height={28} />,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused, color }) => <SvgXml xml={focused ? ActiveProfile : Profile} height={28} />,
         }}
       />
     </Tabs>
